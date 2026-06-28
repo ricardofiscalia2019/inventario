@@ -15,6 +15,18 @@ if (!$id || !$origen) {
     exit;
 }
 
+// Manejo de documento adjunto (acta) - opcional
+$archivoActa = $_FILES['documento'] ?? null;
+if ($archivoActa && isset($archivoActa['name']) && $archivoActa['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = '/mnt/actas/';
+    $nombreOriginal = basename($archivoActa['name']);
+    $nombreSeguro = preg_replace('/[^A-Za-z0-9_\\.-]/', '_', $nombreOriginal);
+    $timestamp = date('Ymd_His');
+    $nombreFinal = $timestamp . '_' . $nombreSeguro;
+    $destino = $uploadDir . $nombreFinal;
+    @move_uploaded_file($archivoActa['tmp_name'], $destino);
+}
+
 $tipo = $_POST['tipo'] ?? '';
 $marca = $_POST['marca'] ?? '';
 $modelo = $_POST['modelo'] ?? '';

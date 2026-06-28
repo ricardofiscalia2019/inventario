@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const tipoSelect = document.getElementById("tipo");
   const otroTipoInput = document.getElementById("otroTipo");
   const asignadoSelect = document.getElementById("asignado");
+    const asignadoSelect = document.getElementById("funcionario");
   const usuarioInput = document.getElementById("usuario");
   const fechaAsignacionInput = document.getElementById("fechaAsignacion");
   const fechaBajaInput = document.getElementById("fechaBaja");

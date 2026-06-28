@@ -9,6 +9,7 @@ require_once 'conexion.php';
             $sn = $_POST['sn'];
             $estado = $_POST['estado'];
             $asignado = $_POST['asignado'];
+            $funcionario = $_POST['funcionario'] ?? null;
             $usuario = $_POST['usuario'];
             $edificio = $_POST['edificio'];
             $unidadFL = $_POST['unidadFL'];
@@ -30,10 +31,10 @@ require_once 'conexion.php';
             }
 
             $sql = "INSERT INTO productos (
-                tipo, marca, modelo, sn, estado, asignado, usuario, edificio, 
+                tipo, marca, modelo, sn, estado, asignado, funcionario, usuario, edificio, 
                 unidad_fl, piso, fecha_asignacion, fecha_baja, descripcion
             ) VALUES (
-                :tipo, :marca, :modelo, :sn, :estado, :asignado, :usuario, :edificio,
+                :tipo, :marca, :modelo, :sn, :estado, :asignado, :funcionario, :usuario, :edificio,
                 :unidadFL, :piso, :fechaAsignacion, :fechaBaja, :descripcion
             )";
 
@@ -46,6 +47,7 @@ require_once 'conexion.php';
                 ':sn' => $sn,
                 ':estado' => $estado,
                 ':asignado' => $asignado,
+                ':funcionario' => $funcionario,
                 ':usuario' => $usuario,
                 ':edificio' => $edificio,
                 ':unidadFL' => $unidadFL,

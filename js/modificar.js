@@ -55,6 +55,22 @@ function mostrarResultados(equipos) {
       form.appendChild(input);
     });
 
+
+    // Campo de documento (acta) - opcional
+    const labelDoc = document.createElement("label");
+    labelDoc.textContent = "Acta / documento (PDF, Word o imagen) - Opcional";
+    labelDoc.classList.add("block", "text-sm", "font-semibold", "mt-4");
+    
+    const inputDoc = document.createElement("input");
+    inputDoc.type = "file";
+    inputDoc.name = "documento";
+    inputDoc.accept = ".pdf,.doc,.docx,image/*";
+    inputDoc.classList.add("p-2", "border", "rounded-lg", "w-full");
+    
+    form.appendChild(labelDoc);
+    form.appendChild(inputDoc);
+
+
     const campos = [
       "estado",
       "asignado",

@@ -84,6 +84,10 @@ if (!isset($_SESSION['usuario'])) {
         <input type="text" id="usuario" name="usuario" />
       </div>
       <div class="form-group">
+        <label for="funcionario">Nombre de funcionario:</label>
+        <input type="text" id="funcionario" name="funcionario" />
+      </div>
+      <div class="form-group">
         <label for="edificio">Edificio:</label>
         <select id="edificio" name="edificio" required>
           <option value="" disabled selected>Seleccionar</option>
