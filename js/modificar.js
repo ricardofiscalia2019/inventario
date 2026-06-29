@@ -162,8 +162,7 @@ function mostrarResultados(equipos) {
     btn.type = "submit";
     btn.textContent = "Modificar";
     btn.classList.add(
-      "bg-[rgb(248,117,22)]",
-      "text-white",
+      "bg-[#d32f2f]",
       "font-bold",
       "py-2",
       "px-4",

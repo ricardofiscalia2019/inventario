@@ -93,9 +93,8 @@ if (!isset($_SESSION['usuario'])) {
     </main>
     <footer>
       <p>
-        Este sitio web ha sido desarrollado y mantenido por el equipo de Soporte Informático y Desarrollo de la Fiscalia Sur. 
-        Si tiene alguna sugerencia, comentario o reclamo, puede enviarnos un mensaje directamente a nuestro correo electrónico: 
-        soporte@minpublico.cl.
+        Sitio desarrollado y mantenido por el equipo de Soporte Informático y Desarrollo de la Fiscalía Sur.
+        Ante cualquier consulta, sugerencia o reclamo, escríbanos a soporte@minpublico.cl
       </p>
     </footer>
 

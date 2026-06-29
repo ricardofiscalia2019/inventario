@@ -79,7 +79,7 @@ require_once 'conexion.php';
             <div style='font-family: sans-serif; text-align: center; margin-top: 50px;'>
             <h1 style='color: blue;'>Producto guardado exitosamente.</h1>
             <a href='../pages/agregar.php' 
-            style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color:rgb(248, 117, 22) color: white; text-decoration: none; border-radius: 5px;'>
+            style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color:rgb(248, 117, 22); color: white; text-decoration: none; border-radius: 5px;'>
             Volver al formulario
             </a>
             </div>
