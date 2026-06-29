@@ -43,6 +43,9 @@ try {
         foreach ($productos as $producto) {
             $col = 1;
             foreach ($producto as $valor) {
+                if (is_string($valor) && strpos($valor, '/mnt/actas/') !== false) {
+                    $valor = str_replace('/mnt/actas/', '\\\\172.17.216.10\\actas\\', $valor);
+                }
                 $sheet1->setCellValue(convertirColumnaExcel($col++) . $row, $valor);
             }
             $row++;
@@ -68,6 +71,9 @@ try {
         foreach ($productosProv as $producto) {
             $col = 1;
             foreach ($producto as $valor) {
+                if (is_string($valor) && strpos($valor, '/mnt/actas/') !== false) {
+                    $valor = str_replace('/mnt/actas/', '\\\\172.17.216.10\\actas\\', $valor);
+                }
                 $sheet2->setCellValue(convertirColumnaExcel($col++) . $row, $valor);
             }
             $row++;

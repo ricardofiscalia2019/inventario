@@ -20,22 +20,39 @@ require_once 'conexion.php';
 
             // Manejo de documento adjunto (acta)
             $archivoActa = $_FILES['documento'] ?? null;
+            $rutaActa = null;
             if ($archivoActa && isset($archivoActa['name']) && $archivoActa['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '/mnt/actas/';
+                $candidatas = [
+                    '\\172.17.216.10\actas\\',
+                    '//172.17.216.10/actas/',
+                    '/mnt/actas/',
+                    __DIR__ . '/../public/actas/'
+                ];
+
                 $nombreOriginal = basename($archivoActa['name']);
                 $nombreSeguro = preg_replace('/[^A-Za-z0-9_\\.-]/', '_', $nombreOriginal);
                 $timestamp = date('Ymd_His');
                 $nombreFinal = $timestamp . '_' . $nombreSeguro;
-                $destino = $uploadDir . $nombreFinal;
-                @move_uploaded_file($archivoActa['tmp_name'], $destino);
+
+                foreach ($candidatas as $dir) {
+                    if (!is_dir($dir) && !@mkdir($dir, 0777, true) && !is_dir($dir)) {
+                        continue;
+                    }
+
+                    $destino = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR . $nombreFinal;
+                    if (@move_uploaded_file($archivoActa['tmp_name'], $destino)) {
+                        $rutaActa = str_replace('\\', '/', $destino);
+                        break;
+                    }
+                }
             }
 
             $sql = "INSERT INTO productos (
                 tipo, marca, modelo, sn, estado, asignado, funcionario, usuario, edificio, 
-                unidad_fl, piso, fecha_asignacion, fecha_baja, descripcion
+                unidad_fl, piso, fecha_asignacion, fecha_baja, descripcion, acta
             ) VALUES (
                 :tipo, :marca, :modelo, :sn, :estado, :asignado, :funcionario, :usuario, :edificio,
-                :unidadFL, :piso, :fechaAsignacion, :fechaBaja, :descripcion
+                :unidadFL, :piso, :fechaAsignacion, :fechaBaja, :descripcion, :acta
             )";
 
             $stmt = $pdo_inv->prepare($sql);
@@ -55,6 +72,7 @@ require_once 'conexion.php';
                 ':fechaAsignacion' => $fechaAsignacion,
                 ':fechaBaja' => $fechaBaja,
                 ':descripcion' => $descripcion,
+                ':acta' => $rutaActa,
             ]);
 
             echo "       

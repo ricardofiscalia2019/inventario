@@ -56,21 +56,6 @@ function mostrarResultados(equipos) {
     });
 
 
-    // Campo de documento (acta) - opcional
-    const labelDoc = document.createElement("label");
-    labelDoc.textContent = "Acta / documento (PDF, Word o imagen) - Opcional";
-    labelDoc.classList.add("block", "text-sm", "font-semibold", "mt-4");
-    
-    const inputDoc = document.createElement("input");
-    inputDoc.type = "file";
-    inputDoc.name = "documento";
-    inputDoc.accept = ".pdf,.doc,.docx,image/*";
-    inputDoc.classList.add("p-2", "border", "rounded-lg", "w-full");
-    
-    form.appendChild(labelDoc);
-    form.appendChild(inputDoc);
-
-
     const campos = [
       "estado",
       "asignado",
@@ -133,8 +118,45 @@ function mostrarResultados(equipos) {
 
         form.appendChild(label);
         form.appendChild(input);
+
+        if (campo === "fecha_baja") {
+          const labelDoc = document.createElement("label");
+          labelDoc.textContent = "ACTUALIZAR ACTA";
+          labelDoc.classList.add("block", "text-sm", "font-semibold", "mt-4");
+
+          const inputDoc = document.createElement("input");
+          inputDoc.type = "file";
+          inputDoc.name = "documento";
+          inputDoc.accept = ".pdf,.doc,.docx,image/*";
+          inputDoc.classList.add("p-2", "border", "rounded-lg", "w-full");
+
+          form.appendChild(labelDoc);
+          form.appendChild(inputDoc);
+        }
       }
     });
+
+    if (equipo.acta) {
+      const btnVerActa = document.createElement("a");
+      btnVerActa.href = `../php/ver_acta.php?id=${encodeURIComponent(equipo.id)}&tabla=${encodeURIComponent(equipo.tabla)}`;
+      btnVerActa.target = "_blank";
+      btnVerActa.rel = "noopener noreferrer";
+      btnVerActa.textContent = "Ver acta adjunta";
+      btnVerActa.classList.add(
+        "inline-block",
+        "bg-[rgb(248,117,22)]",
+        "text-white",
+        "font-bold",
+        "py-2",
+        "px-4",
+        "rounded-lg",
+        "hover:bg-[rgb(24,45,152)]",
+        "transition-colors",
+        "mt-4",
+        "mr-2"
+      );
+      form.appendChild(btnVerActa);
+    }
 
     const btn = document.createElement("button");
     btn.type = "submit";

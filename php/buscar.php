@@ -18,7 +18,7 @@ $resultado = [];
 function buscarEnTabla($pdo, $tabla) {
     global $busqueda, $resultado;
 
-    $sql = "SELECT * FROM $tabla WHERE sn = :busqueda OR usuario = :busqueda";
+    $sql = "SELECT * FROM $tabla WHERE LOWER(COALESCE(sn, '')) = LOWER(:busqueda) OR LOWER(COALESCE(usuario, '')) = LOWER(:busqueda)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['busqueda' => $busqueda]);
 
@@ -39,7 +39,8 @@ function buscarEnTabla($pdo, $tabla) {
             "piso" => $row['piso'] ?? '',
             "fecha_asignacion" => $row['fecha_asignacion'] ?? '',
             "fecha_baja" => $row['fecha_baja'] ?? '',
-            "descripcion" => $row['descripcion'] ?? ''
+            "descripcion" => $row['descripcion'] ?? '',
+            "acta" => $row['acta'] ?? ''
         ];
         $resultado[] = $item;
     }
